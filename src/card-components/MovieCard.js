@@ -30,14 +30,26 @@ const posterMap = {
 export default class MovieCard extends Component {
 
   render() {
+    console.log(this.props) // How does this know about movie showcase?? Showcase imports this, but this also knows about showcase w/o importing it?
     return (
       <div className="movie-card">
         {/* which component should receive which props? */}
-        <CardFront />
-        <CardBack />
+        <CardFront poster={posterMap[this.props.poster]} />
+        <CardBack 
+          title={this.props.title} // <MovieCard title = movie.title>
+					IMDBRating={this.props.IMDBRating}
+					genres={this.props.genres}
+          />
       </div>
     )
   }
 }
+
+MovieCard.defaultProps = {
+	title: 'Unknown',
+	IMDBRating: null,
+	genres: ['No Genre(s) Found'],
+	poster: 'default'
+};
 
 // Don't forget your default props!
